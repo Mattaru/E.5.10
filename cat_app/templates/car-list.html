@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <br>
+        <h1>Car's catalogue</h1>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-8">
+                {% for car in object_list %}
+                <div class="car-card">
+                    <h3>{{ car.producer }}</h3>
+                    <p>Model: <strong>{{ car.model }}</strong></p>
+                    <p>Release year: <strong>{{ car.release_year }}</strong></p>
+                    <p>Transmission: <strong>{{ car.transmission }}</strong></p>
+                    <p>Color: <strong>{{ car.color }}</strong></p>
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+            <div class="col-4">
+                <form class="one-row-search" action="{% url 'catalog:car-list' %}">
+                    {{ one_row_search }}
+                    <button type="submit">search</button>
+                </form>
+                <form class="search-form" action="{% url 'catalog:car-list' %}">
+                    <table>{{ optional_search }}</table>
+                    <button class="form-btn" type="submit">search</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
